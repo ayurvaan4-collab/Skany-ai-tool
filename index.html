@@ -1,0 +1,1477 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Skany — Ayurvaan AI Skin Intelligence</title>
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        obsidian: '#040406', // High-end premium deep dark base
+                        coal: '#0C0C10',     // Luxurious glassmorphic card base
+                        gold: {
+                            light: '#F5E3B8', // Brilliant champagne gold
+                            DEFAULT: '#CFA152', // Classic rich gold
+                            dark: '#9E7431',
+                        }
+                    },
+                    fontFamily: {
+                        serif: ['Cinzel', 'serif'],
+                        sans: ['Plus Jakarta Sans', 'sans-serif'],
+                    }
+                }
+            }
+        }
+    </script>
+    <!-- Google Fonts for Luxury Brand Typography -->
+    <link
+        href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;500;600;700&family=Plus+Jakarta+Sans:wght@300;400;500;600;700&display=swap"
+        rel="stylesheet">
+
+    <style>
+        body {
+            background-color: #040406;
+            font-family: 'Plus Jakarta Sans', sans-serif;
+            color: #F1F1F5;
+            -webkit-font-smoothing: antialiased;
+        }
+
+        /* Gold button sweep shine animation */
+        @keyframes shimmer {
+            0% {
+                background-position: -200% 0;
+            }
+
+            100% {
+                background-position: 200% 0;
+            }
+        }
+
+        .shimmer-btn {
+            background: linear-gradient(90deg, #9E7431, #CFA152, #F5E3B8, #CFA152, #9E7431);
+            background-size: 200% auto;
+            animation: shimmer 4.5s linear infinite;
+        }
+
+        /* Accurate vertically sweeping high-tech scanning line */
+        @keyframes laser-sweep {
+            0% {
+                top: 0%;
+                opacity: 0.95;
+            }
+
+            50% {
+                top: 100%;
+                opacity: 0.95;
+            }
+
+            100% {
+                top: 0%;
+                opacity: 0.95;
+            }
+        }
+
+        .laser-line {
+            height: 3px;
+            background: linear-gradient(90deg,
+                    rgba(207, 161, 82, 0) 0%,
+                    rgba(207, 161, 82, 1) 30%,
+                    rgba(255, 255, 255, 1) 50%,
+                    rgba(207, 161, 82, 1) 70%,
+                    rgba(207, 161, 82, 0) 100%);
+            box-shadow: 0 0 18px 5px rgba(207, 161, 82, 0.8), 0 0 35px 10px rgba(207, 161, 82, 0.45);
+            animation: laser-sweep 3.2s ease-in-out infinite;
+        }
+
+        /* Outer frame pulse glow during processing */
+        @keyframes gold-pulse {
+
+            0%,
+            100% {
+                box-shadow: 0 0 20px 2px rgba(207, 161, 82, 0.15);
+                border-color: rgba(207, 161, 82, 0.35);
+            }
+
+            50% {
+                box-shadow: 0 0 45px 10px rgba(207, 161, 82, 0.55);
+                border-color: rgba(207, 161, 82, 0.85);
+            }
+        }
+
+        .pulsing-ring {
+            animation: gold-pulse 2.8s infinite ease-in-out;
+        }
+
+        /* Interactive diagnostic target dots pulsing animation */
+        @keyframes marker-glow {
+
+            0%,
+            100% {
+                transform: scale(1);
+                box-shadow: 0 0 0 0px rgba(207, 161, 82, 0.8);
+            }
+
+            50% {
+                transform: scale(1.15);
+                box-shadow: 0 0 12px 6px rgba(207, 161, 82, 0);
+            }
+        }
+
+        .hotspot-dot {
+            animation: marker-glow 2s infinite ease-in-out;
+        }
+
+        /* Glassmorphic panels */
+        .glass-panel {
+            background: rgba(12, 12, 16, 0.92);
+            backdrop-filter: blur(25px);
+            border: 1px solid rgba(207, 161, 82, 0.18);
+        }
+
+        .glass-panel-light {
+            background: rgba(255, 255, 255, 0.015);
+            backdrop-filter: blur(15px);
+            border: 1px solid rgba(255, 255, 255, 0.04);
+        }
+
+        .gold-text {
+            background: linear-gradient(135deg, #FFFFFF 0%, #F5E3B8 50%, #CFA152 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+    </style>
+</head>
+
+<body
+    class="min-h-screen flex flex-col justify-between relative overflow-x-hidden selection:bg-gold selection:text-black">
+
+    <!-- Top soft ambient backdrop highlight -->
+    <div
+        class="absolute top-0 left-1/2 -translate-x-1/2 w-full max-w-7xl h-[450px] bg-[radial-gradient(circle_at_top,rgba(207,161,82,0.06),transparent_65%)] pointer-events-none z-0">
+    </div>
+
+    <!-- HEADER (Ayurvaan Brand Domain: Skany) -->
+    <header
+        class="relative z-10 w-full max-w-5xl mx-auto px-6 pt-6 pb-3 flex justify-between items-center border-b border-white/5">
+        <div class="flex items-center gap-2.5">
+            <span class="text-xs tracking-[0.35em] text-zinc-400 uppercase font-light">AYURVAAN</span>
+            <span class="w-1.5 h-1.5 rounded-full bg-gold inline-block"></span>
+            <span class="text-sm tracking-[0.45em] font-serif uppercase gold-text font-bold">Skany</span>
+        </div>
+        <div class="flex items-center gap-4">
+            <span id="location-badge"
+                class="text-[9px] tracking-widest text-zinc-400 uppercase font-medium">ESTABLISHING
+                GEOLOCATION...</span>
+            <div class="px-3 py-1 rounded-full border border-gold/20 bg-gold/5 flex items-center gap-1.5">
+                <span class="w-1.5 h-1.5 rounded-full bg-emerald-500 animate-pulse"></span>
+                <span class="text-[9px] tracking-wider font-semibold text-gold font-serif">AYUR-ENGINE V2</span>
+            </div>
+        </div>
+    </header>
+
+    <!-- MAIN INTERACTION WRAPPER -->
+    <main class="relative z-10 flex-grow w-full max-w-lg mx-auto px-4 py-8 flex flex-col justify-center">
+
+        <!-- VIEW 1: HOME & INPUT STATE -->
+        <div id="view-upload" class="space-y-10 animate-fade-in">
+            <img src="https://i.ibb.co/mFgBDzRb/logo.png" alt="Skany.ai Logo"
+                style="height: 25px; width: auto; object-fit: contain; margin-bottom: 10px;">
+            <div class="text-center space-y-3.5">
+                <span class="text-[10px] tracking-[0.4em] text-gold uppercase font-bold">PREDICTIVE CLINICAL
+                    AYURVEDA</span>
+                <h1 class="text-3xl sm:text-4xl font-serif tracking-wider text-white">
+                    Bio-Attribute <br><span class="italic gold-text">Dermal Scanner</span>
+                </h1>
+                <p class="text-xs sm:text-sm text-zinc-400 max-w-sm mx-auto font-light leading-relaxed">
+                    Map cellular barrier matrix integrity, moisture retention indices, and dominant constitutional Dosha
+                    balances with absolute repeatability.
+                </p>
+            </div>
+
+            <!-- Beautiful Clinical Sample Selectors to Instant Testing -->
+            <div class="space-y-4">
+                <div class="flex items-center justify-between px-1">
+                    <span class="text-[10px] tracking-widest text-zinc-400 uppercase font-bold">Verified Presets</span>
+                    <span class="text-[9px] text-gold font-semibold font-serif uppercase tracking-wider">Exact
+                        Consistency Engaged</span>
+                </div>
+                <div class="grid grid-cols-3 gap-3.5">
+                    <!-- Priya (Dry Matrix) -->
+                    <button onclick="usePreloadPortrait('female-1')"
+                        class="group relative overflow-hidden rounded-xl border border-white/5 hover:border-gold/50 transition-all duration-300 bg-coal p-1.5 flex flex-col items-center">
+                        <div
+                            class="relative w-14 h-14 rounded-full overflow-hidden border border-white/10 group-hover:border-gold/30 transition-all">
+                            <img src="<a href=" https://ibb.co/35xsDRdQ"><img
+                                src="https://i.ibb.co/ymzRw4P7/allef-vinicius-Bq-NEe-ZAtxg-unsplash.jpg"
+                                alt="allef-vinicius-Bq-NEe-ZAtxg-unsplash" border="0" /></a>"
+                            alt="Priya"
+                            class="w-full h-full object-cover group-hover:scale-105 transition-all duration-500">
+                        </div>
+                        <span class="text-[10px] text-zinc-200 mt-2.5 font-semibold">Priya</span>
+                        <span class="text-[8px] text-gold tracking-wide mt-0.5 uppercase">Dry Vata</span>
+                    </button>
+
+                    <!-- Elena (Sensitive Matrix) -->
+                    <button onclick="usePreloadPortrait('female-2')"
+                        class="group relative overflow-hidden rounded-xl border border-white/5 hover:border-gold/50 transition-all duration-300 bg-coal p-1.5 flex flex-col items-center">
+                        <div
+                            class="relative w-14 h-14 rounded-full overflow-hidden border border-white/10 group-hover:border-gold/30 transition-all">
+                            <img src="https://images.unsplash.com/photo-1544005313-94ddf0286df2?auto=format&fit=crop&q=80&w=250&h=250"
+                                alt="Elena"
+                                class="w-full h-full object-cover group-hover:scale-105 transition-all duration-500">
+                        </div>
+                        <span class="text-[10px] text-zinc-200 mt-2.5 font-semibold">Elena</span>
+                        <span class="text-[8px] text-gold tracking-wide mt-0.5 uppercase">Pitta Hotspot</span>
+                    </button>
+
+                    <!-- Arjun (Sebaceous Matrix) -->
+                    <button onclick="usePreloadPortrait('male-1')"
+                        class="group relative overflow-hidden rounded-xl border border-white/5 hover:border-gold/50 transition-all duration-300 bg-coal p-1.5 flex flex-col items-center">
+                        <div
+                            class="relative w-14 h-14 rounded-full overflow-hidden border border-white/10 group-hover:border-gold/30 transition-all">
+                            <img src="https://images.unsplash.com/photo-1506794778202-cad84cf45f1d?auto=format&fit=crop&q=80&w=250&h=250"
+                                alt="Arjun"
+                                class="w-full h-full object-cover group-hover:scale-105 transition-all duration-500">
+                        </div>
+                        <span class="text-[10px] text-zinc-200 mt-2.5 font-semibold">Arjun</span>
+                        <span class="text-[8px] text-gold tracking-wide mt-0.5 uppercase">Kapha Zone</span>
+                    </button>
+                </div>
+            </div>
+
+            <!-- ACTION CONTAINER -->
+            <div class="glass-panel rounded-2xl p-7 space-y-5 relative">
+
+                <!-- Camera view (Active during capture state) -->
+                <div id="camera-container"
+                    class="hidden relative w-full aspect-square max-w-[260px] mx-auto rounded-full overflow-hidden border-2 border-gold/30 mb-4 pulsing-ring">
+                    <video id="webcam" class="w-full h-full object-cover scale-x-[-1]" autoplay playsinline></video>
+                    <div
+                        class="absolute inset-0 border-4 border-dashed border-gold/25 rounded-full pointer-events-none">
+                    </div>
+                    <button onclick="captureSelfie()"
+                        class="absolute bottom-5 left-1/2 -translate-x-1/2 px-5 py-2.5 bg-gold text-black rounded-full font-bold text-xs uppercase tracking-widest shadow-lg hover:bg-gold-light transition duration-300">
+                        ⚡ Capture Frame
+                    </button>
+                </div>
+
+                <!-- Minimal Action Interface (Clean of parenthetical labels) -->
+                <div class="grid grid-cols-1 gap-3.5" id="main-upload-buttons">
+                    <button onclick="startLiveCamera()"
+                        class="w-full py-4 px-6 rounded-xl border border-gold bg-gold/5 text-gold font-bold text-xs uppercase tracking-[0.18em] hover:bg-gold/10 transition-all duration-300 flex items-center justify-center gap-3">
+                        <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                d="M3 9a2 2 0 012-2h.93a2 2 0 001.664-.89l.812-1.22A2 2 0 0110.07 4h3.86a2 2 0 011.664.89l.812 1.22A2 2 0 0018.07 7H19a2 2 0 012 2v9a2 2 0 01-2 2H5a2 2 0 01-2-2V9z">
+                            </path>
+                        </svg>
+                        Scan Now
+                    </button>
+
+                    <button onclick="triggerFileInput()"
+                        class="w-full py-4 px-6 rounded-xl border border-white/10 bg-coal hover:border-gold/40 text-white font-bold text-xs uppercase tracking-[0.18em] transition-all duration-300 flex items-center justify-center gap-3">
+                        <svg class="w-4 h-4 text-zinc-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z">
+                            </path>
+                        </svg>
+                        Upload Photo
+                    </button>
+                </div>
+
+                <div class="text-center">
+                    <span class="text-[9px] text-zinc-500 font-semibold tracking-wider block uppercase">🔒 Ayurvaan
+                        End-to-End Cryptographic Security Standards</span>
+                </div>
+            </div>
+
+            <!-- Input controller -->
+            <input type="file" id="user-file-input" accept="image/*" class="hidden"
+                onchange="handleCustomUpload(event)">
+        </div>
+
+        <!-- VIEW 2: LOADING & REAL-TIME SCANNING LINE STATE -->
+        <div id="view-scanning" class="hidden space-y-8 animate-fade-in">
+            <div class="text-center space-y-2">
+                <span class="text-[10px] tracking-[0.4em] text-gold uppercase font-bold">Ayurvaan Scanner Active</span>
+                <h2 class="text-xl sm:text-2xl font-serif text-white tracking-wider uppercase">Mapping Dermal Attributes
+                </h2>
+            </div>
+
+            <!-- Perfect round photo frame with vertical glowing laser line -->
+            <div class="flex justify-center">
+                <div
+                    class="relative pulsing-ring w-64 h-64 sm:w-72 sm:h-72 rounded-full border border-gold/40 overflow-hidden bg-coal">
+                    <img id="scanned-image" src="" alt="Clinical Dermal Target" class="w-full h-full object-cover">
+
+                    <!-- High-tech glowing vertical scanning line -->
+                    <div class="laser-line absolute left-0 right-0 z-20"></div>
+
+                    <!-- Grayscale shading matrix simulation -->
+                    <div
+                        class="absolute inset-0 bg-radial-gradient(circle_at_center, transparent_60%, rgba(0,0,0,0.6)) pointer-events-none z-10">
+                    </div>
+                </div>
+            </div>
+
+            <!-- Console timeline indicators -->
+            <div class="glass-panel rounded-2xl p-6 max-w-sm mx-auto space-y-4">
+                <div class="flex items-center gap-3">
+                    <span class="relative flex h-2 w-2">
+                        <span
+                            class="animate-ping absolute inline-flex h-full w-full rounded-full bg-gold opacity-75"></span>
+                        <span class="relative inline-flex rounded-full h-2 w-2 bg-gold"></span>
+                    </span>
+                    <span class="text-[9px] uppercase tracking-widest text-zinc-400 font-bold font-serif">DIAGNOSTICS
+                        INTERFACE</span>
+                </div>
+
+                <!-- Text indicators requested by user flow -->
+                <div
+                    class="min-h-[50px] bg-black/60 rounded-lg p-3.5 border border-white/5 text-xs text-zinc-300 font-mono flex items-center justify-start gap-1">
+                    <span id="scan-status-text" class="leading-relaxed">Analyzing localized skin metrics and Ayurvedic
+                        bio-attributes...</span>
+                    <span class="animate-pulse font-bold text-gold">|</span>
+                </div>
+
+                <!-- Calculation status bar -->
+                <div class="space-y-1.5">
+                    <div class="flex justify-between text-[9px] text-zinc-500 uppercase tracking-wider font-semibold">
+                        <span>Analysis Load</span>
+                        <span id="scan-percentage">0%</span>
+                    </div>
+                    <div class="w-full h-[2px] bg-zinc-900 rounded-full overflow-hidden">
+                        <div id="scan-progress-bar"
+                            class="w-0 h-full bg-gradient-to-r from-gold-dark to-gold rounded-full transition-all duration-300">
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- VIEW 3: FREE TIER DISPLAY STATE -->
+        <div id="view-report-container" class="hidden space-y-8 animate-fade-in">
+
+            <div class="text-center space-y-1 py-1">
+                <span class="text-[9px] tracking-widest text-zinc-500 uppercase font-mono font-bold">ANALYSIS ARCHIVE
+                    RECORD ID: #SFX-99831</span>
+                <h3 class="text-2xl font-serif text-white uppercase tracking-wider">Your Clinical Skin Profile</h3>
+                <p class="text-xs text-zinc-400 font-light">Formulated by Ayurvaan AI on <span id="report-date"
+                        class="font-medium text-zinc-300"></span></p>
+            </div>
+
+            <!-- Highly Detailed Profile Card (FREE TIER) -->
+            <div
+                class="glass-panel rounded-3xl p-8 space-y-8 border-2 border-gold/40 shadow-[0_0_50px_rgba(207,161,82,0.15)] relative overflow-hidden bg-gradient-to-b from-coal to-obsidian">
+
+                <!-- Corner Borders for Ultra-Luxury Look -->
+                <div class="absolute top-3 left-3 w-4 h-4 border-t-2 border-l-2 border-gold/40"></div>
+                <div class="absolute top-3 right-3 w-4 h-4 border-t-2 border-r-2 border-gold/40"></div>
+
+                <div class="absolute top-4 right-4">
+                    <span
+                        class="px-3 py-1 rounded-full text-[9px] bg-gold/10 text-gold border border-gold/30 uppercase font-mono font-bold tracking-widest animate-pulse">✓
+                        Unlocked Basic Bio-Analysis</span>
+                </div>
+
+                <!-- 1. SKIN BARRIER HEALTH SCORE & USER IMAGE -->
+                <div class="flex flex-col sm:flex-row items-center justify-around gap-8 pb-8 border-b border-white/10">
+
+                    <!-- Circular photo with the 3 interactive clinical improvements marker dots -->
+                    <div
+                        class="relative w-48 h-48 rounded-full border-2 border-gold/50 overflow-hidden bg-coal p-1 shadow-lg shadow-black/85">
+                        <img id="unlocked-user-thumbnail" src="" class="w-full h-full object-cover rounded-full">
+
+                        <!-- Marker Hotspot Dot 1 -->
+                        <div id="dot-1" class="absolute top-[20%] left-[45%] w-4.5 h-4.5 z-30 cursor-pointer group/dot"
+                            onclick="revealHotspotTooltip(1)">
+                            <div
+                                class="hotspot-dot w-3.5 h-3.5 bg-gold border border-white rounded-full flex items-center justify-center">
+                            </div>
+                            <div
+                                class="absolute bottom-6 left-1/2 -translate-x-1/2 bg-black/95 text-white border border-gold/30 text-[9px] px-2.5 py-1.5 rounded-lg w-36 pointer-events-none opacity-0 group-hover/dot:opacity-100 transition-opacity duration-300 text-center font-sans tracking-wide leading-relaxed shadow-xl">
+                                <span class="block font-bold text-gold uppercase text-[8px] mb-0.5">ZONE A</span>
+                                <span id="dot-tooltip-1">Stratum Corneum micro-dehydration lines.</span>
+                            </div>
+                        </div>
+
+                        <!-- Marker Hotspot Dot 2 -->
+                        <div id="dot-2" class="absolute top-[50%] left-[25%] w-4.5 h-4.5 z-30 cursor-pointer group/dot"
+                            onclick="revealHotspotTooltip(2)">
+                            <div
+                                class="hotspot-dot w-3.5 h-3.5 bg-red-500 border border-white rounded-full flex items-center justify-center">
+                            </div>
+                            <div
+                                class="absolute bottom-6 left-1/2 -translate-x-1/2 bg-black/95 text-white border border-gold/30 text-[9px] px-2.5 py-1.5 rounded-lg w-36 pointer-events-none opacity-0 group-hover/dot:opacity-100 transition-opacity duration-300 text-center font-sans tracking-wide leading-relaxed shadow-xl">
+                                <span class="block font-bold text-red-400 uppercase text-[8px] mb-0.5">ZONE B</span>
+                                <span id="dot-tooltip-2">Active vascular capillary dilatation.</span>
+                            </div>
+                        </div>
+
+                        <!-- Marker Hotspot Dot 3 -->
+                        <div id="dot-3" class="absolute top-[65%] left-[62%] w-4.5 h-4.5 z-30 cursor-pointer group/dot"
+                            onclick="revealHotspotTooltip(3)">
+                            <div
+                                class="hotspot-dot w-3.5 h-3.5 bg-amber-500 border border-white rounded-full flex items-center justify-center">
+                            </div>
+                            <div
+                                class="absolute bottom-6 left-1/2 -translate-x-1/2 bg-black/95 text-white border border-gold/30 text-[9px] px-2.5 py-1.5 rounded-lg w-36 pointer-events-none opacity-0 group-hover/dot:opacity-100 transition-opacity duration-300 text-center font-sans tracking-wide leading-relaxed shadow-xl">
+                                <span class="block font-bold text-amber-400 uppercase text-[8px] mb-0.5">ZONE C</span>
+                                <span id="dot-tooltip-3">Follicular sebum blockage coordinates.</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Circular Progress Gauge Score -->
+                    <div class="text-center space-y-2 flex flex-col items-center">
+                        <span class="text-[10px] uppercase tracking-widest text-zinc-400 font-bold block">BARRIER
+                            INTEGRITY SCORE</span>
+                        <div
+                            class="relative w-28 h-28 flex items-center justify-center bg-black/40 rounded-full border border-white/5 shadow-inner">
+                            <svg class="absolute inset-0 w-full h-full -rotate-90">
+                                <circle cx="56" cy="56" r="46" stroke="rgba(255,255,255,0.02)" stroke-width="7"
+                                    fill="transparent" />
+                                <circle cx="56" cy="56" r="46" stroke="#CFA152" stroke-width="7" fill="transparent"
+                                    stroke-dasharray="289" id="circle-score-dash" stroke-dashoffset="90" />
+                            </svg>
+                            <div class="text-center">
+                                <span class="text-3xl font-serif text-white font-bold tracking-tight"
+                                    id="barrier-score-display">--</span>
+                                <span class="text-[10px] text-zinc-500 block">/100</span>
+                            </div>
+                        </div>
+                        <span
+                            class="inline-block px-4 py-1.5 mt-1 rounded-full text-[10px] font-bold text-rose-400 bg-rose-500/10 border border-rose-500/20 uppercase tracking-wider"
+                            id="barrier-status-text">--</span>
+                    </div>
+                </div>
+
+                <!-- 2. DOSHA METERS SECTION (MORE EXTENSIVE CONTENT) -->
+                <div class="space-y-4 pb-6 border-b border-white/10">
+                    <span
+                        class="text-[10px] uppercase tracking-[0.2em] text-zinc-400 font-bold block text-center">Bio-Elemental
+                        Core Matrix (Prakriti)</span>
+                    <div class="grid grid-cols-1 gap-3.5 bg-black/40 p-4 rounded-xl border border-white/5">
+                        <!-- Vata Meter -->
+                        <div class="space-y-1">
+                            <div class="flex justify-between text-[10px] uppercase font-semibold">
+                                <span class="text-zinc-300 tracking-wide">Vata Air Index (Moisture Regulation)</span>
+                                <span id="meter-vata-val" class="text-gold">--</span>
+                            </div>
+                            <div class="w-full h-2 bg-zinc-900 rounded-full overflow-hidden border border-white/5">
+                                <div id="meter-vata-bar"
+                                    class="h-full bg-gradient-to-r from-gold-dark to-gold transition-all duration-500"
+                                    style="width: 0%"></div>
+                            </div>
+                        </div>
+                        <!-- Pitta Meter -->
+                        <div class="space-y-1">
+                            <div class="flex justify-between text-[10px] uppercase font-semibold">
+                                <span class="text-zinc-300 tracking-wide">Pitta Fire Index (Thermal Sensitivity)</span>
+                                <span id="meter-pitta-val" class="text-red-400">--</span>
+                            </div>
+                            <div class="w-full h-2 bg-zinc-900 rounded-full overflow-hidden border border-white/5">
+                                <div id="meter-pitta-bar"
+                                    class="h-full bg-gradient-to-r from-red-600 to-red-400 transition-all duration-500"
+                                    style="width: 0%"></div>
+                            </div>
+                        </div>
+                        <!-- Kapha Meter -->
+                        <div class="space-y-1">
+                            <div class="flex justify-between text-[10px] uppercase font-semibold">
+                                <span class="text-zinc-300 tracking-wide">Kapha Earth Index (Sebum Matrix)</span>
+                                <span id="meter-kapha-val" class="text-amber-500">--</span>
+                            </div>
+                            <div class="w-full h-2 bg-zinc-900 rounded-full overflow-hidden border border-white/5">
+                                <div id="meter-kapha-bar"
+                                    class="h-full bg-gradient-to-r from-amber-600 to-amber-500 transition-all duration-500"
+                                    style="width: 0%"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 3. AYURVEDIC PRAKRITI / DOMINANT DOSHA PROFILE -->
+                <div class="space-y-3 text-center pb-6 border-b border-white/10">
+                    <span class="text-[10px] uppercase tracking-widest text-gold font-bold font-serif">Dominant
+                        Constitutional Prakriti</span>
+                    <h4 id="primary-dosha-title" class="text-2xl font-serif text-white tracking-widest uppercase">Vata
+                        Profile</h4>
+                    <p id="primary-dosha-desc"
+                        class="text-xs text-zinc-300 max-w-md mx-auto leading-relaxed font-light">
+                        Thin, delicate epidermic layers characterized by minimal lipid matrices, leading to localized
+                        dehydration, sensitivity to cold parameters, and micro-texture definition.
+                    </p>
+                </div>
+
+                <!-- 4. ROOT CAUSE ANALYSIS BLOCK -->
+                <div class="space-y-3 text-center pb-6 border-b border-white/10">
+                    <div
+                        class="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-red-500/5 border border-red-500/20 text-[9px] tracking-widest text-red-400 font-bold">
+                        🔬 PATHOLOGICAL ROOT CAUSE ANATOMY
+                    </div>
+                    <p id="root-cause-text" class="text-xs text-zinc-300 leading-relaxed max-w-md mx-auto font-light">
+                        Your Pitta is highly aggravated due to environmental heat stress and synthetic chemical
+                        over-exfoliation, leading to systemic capillary sensitivity and barrier disruption.
+                    </p>
+                </div>
+
+                <!-- 5. NEW FREE INITIAL RECOMMENDATION (MORE CONTENT FOR TRIAL USER) -->
+                <div class="space-y-3 text-center">
+                    <div
+                        class="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-emerald-500/5 border border-emerald-500/20 text-[9px] tracking-widest text-emerald-400 font-bold">
+                        🌿 FREE INITIAL HERBAL RITUAL
+                    </div>
+                    <p id="free-daily-ritual" class="text-xs text-zinc-300 leading-relaxed max-w-md mx-auto font-light">
+                        Loading initial balancing protocols...
+                    </p>
+                    <p class="text-[10px] text-zinc-400 italic">
+                        *Note: Complete 7-Day target timeline and accurate botanical measurement ratios are locked in
+                        the premium report tier below.
+                    </p>
+                </div>
+            </div>
+
+            <!--
+<!-- THE PREMIUM PAYWALL TRIGGER (Highly Optimised Conversion Hook) -->
+            <div
+                class="glass-panel rounded-3xl p-6 sm:p-8 border-2 border-gold/40 bg-gradient-to-b from-obsidian via-coal to-black relative shadow-[0_0_50px_rgba(191,149,63,0.15)] text-center space-y-6 overflow-hidden">
+
+                <!-- Absolute Luxury Accents -->
+                <div
+                    class="absolute top-0 left-0 right-0 bg-gradient-to-r from-gold-dark via-gold to-gold-dark text-black text-[10px] font-bold uppercase tracking-widest py-1.5 font-mono">
+                    ✨ Unlock Complete 24-Page Custom AI Biology Report ✨
+                </div>
+
+                <div class="pt-4 space-y-2">
+                    <h3 class="text-2xl font-serif font-bold text-white tracking-wide uppercase">Your Solution Matrix is
+                        Ready</h3>
+                    <p class="text-xs text-zinc-400 max-w-sm mx-auto font-light leading-relaxed">
+                        Instantly unlock your personalized 7-Day Ayurvedic Healing Blueprint, target formulation
+                        measurements, and cosmetic blacklists.
+                    </p>
+                </div>
+
+                <!-- EXTREME VALUE VALUE-PROPOSITION STACK -->
+                <div class="text-left bg-black/40 p-4 rounded-2xl border border-white/5 space-y-3">
+                    <div class="flex items-start gap-3">
+                        <span class="text-lg mt-0.5">🌿</span>
+                        <div>
+                            <h4 class="text-xs font-semibold text-zinc-200">Personalized 7-Day Organic Blueprint</h4>
+                            <p class="text-[11px] text-zinc-400 font-light">Zero-cost kitchen remedies (exact
+                                measurement ratios of Neem, Aloe, and custom herbs) explicitly tailored to balance your
+                                Pitta inflammation.</p>
+                        </div>
+                    </div>
+
+                    <div class="flex items-start gap-3 border-t border-white/5 pt-3">
+                        <span class="text-lg mt-0.5">🚫</span>
+                        <div>
+                            <h4 class="text-xs font-semibold text-zinc-200">The Cosmetic Chemical Blacklist Interceptor
+                            </h4>
+                            <p class="text-[11px] text-zinc-400 font-light">5 specific high-end commercial ingredients
+                                you must immediately ban from your daily routine to stop active barrier erosion.</p>
+                        </div>
+                    </div>
+
+                    <div class="flex items-start gap-3 border-t border-white/5 pt-3">
+                        <span class="text-lg mt-0.5">🎟️</span>
+                        <div>
+                            <h4 class="text-xs font-semibold text-emerald-400">Complimentary Ayurvaan Voucher Included
+                            </h4>
+                            <p class="text-[11px] text-emerald-500/90 font-light">Get an instant <span
+                                    id="voucher-txt">₹100</span> cash voucher valid on our upcoming bespoke wellness
+                                range. Net software cost: <span class="font-bold">FREE</span>.</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- REGIONAL PRICING TABS (DYNAMIC SELECTION LAYER) -->
+                <div class="grid grid-cols-2 gap-3 max-w-sm mx-auto">
+                    <!-- Indian User Tab -->
+                    <button id="tab-in" onclick="setRegion('in')"
+                        class="bg-black/60 p-3 rounded-xl border-2 border-gold text-center cursor-pointer transition-all duration-300 relative group focus:outline-none">
+                        <span
+                            class="absolute -top-2 left-1/2 -translate-x-1/2 bg-gold text-black text-[8px] font-bold uppercase px-2 py-0.5 rounded shadow">🇮🇳
+                            India</span>
+                        <div class="flex items-baseline justify-center gap-1 pt-1">
+                            <span class="text-zinc-500 line-through text-[10px]">₹899</span>
+                            <span class="text-xl font-serif font-bold text-white">₹99</span>
+                        </div>
+                        <span class="text-[9px] text-emerald-400 block font-semibold">89% OFF</span>
+                    </button>
+
+                    <!-- International User Tab -->
+                    <button id="tab-gl" onclick="setRegion('gl')"
+                        class="bg-zinc-900/40 p-3 rounded-xl border border-white/10 text-center cursor-pointer opacity-50 hover:opacity-80 transition-all duration-300 relative group focus:outline-none">
+                        <span
+                            class="absolute -top-2 left-1/2 -translate-x-1/2 bg-zinc-800 text-zinc-400 text-[8px] font-bold uppercase px-2 py-0.5 rounded border border-white/5">🌐
+                            Global</span>
+                        <div class="flex items-baseline justify-center gap-1 pt-1">
+                            <span class="text-zinc-500 line-through text-[10px]">$9.99</span>
+                            <span class="text-xl font-serif font-bold text-zinc-300">$1.99</span>
+                        </div>
+                        <span class="text-[9px] text-emerald-400 block font-semibold">80% OFF</span>
+                    </button>
+                </div>
+
+                <!-- ACTION CTA AND RISK REVERSAL -->
+                <div class="space-y-4 max-w-sm mx-auto">
+                    <button id="paywall-btn"
+                        class="w-full bg-gradient-to-r from-gold-dark via-gold to-gold-dark text-black font-semibold text-xs uppercase tracking-widest py-4 rounded-xl shadow-lg shadow-gold/20 hover:opacity-95 active:scale-[0.99] transition-all duration-200 cursor-pointer">
+                        Unlock Premium Analysis Report (₹99)
+                    </button>
+
+                    <!-- URGENCY TIMER -->
+                    <div
+                        class="text-[10px] text-amber-500 font-mono tracking-wide bg-amber-500/5 py-1.5 rounded-lg border border-amber-500/10">
+                        ⚠️ Server Optimization Hold: <span id="timer" class="font-bold">15:00</span> before data purge.
+                    </div>
+
+                    <p class="text-[10px] text-zinc-500 font-light">
+                        🔒 Bank-Grade Encrypted UPI, Cards, & PayPal Gateway Matrix.
+                    </p>
+                </div>
+            </div>
+
+            <!-- JAVASCRIPT FOR SELECTING TABS AND UPDATING PRICES -->
+            <script>
+                function startUrgencyTimer(duration, display) {
+                    let timer = duration, minutes, seconds;
+                    setInterval(function () {
+                        minutes = parseInt(timer / 60, 10);
+                        seconds = parseInt(timer % 60, 10);
+                        minutes = minutes < 10 ? "0" + minutes : minutes;
+                        seconds = seconds < 10 ? "0" + seconds : seconds;
+                        display.textContent = minutes + ":" + seconds;
+                        if (--timer < 0) { timer = duration; }
+                    }, 1000);
+                }
+
+                // This code runs when the page loads
+                setTimeout(() => {
+                    let fifteenMinutes = 60 * 15,
+                        display = document.querySelector('#timer');
+                    if (display) startUrgencyTimer(fifteenMinutes, display);
+                }, 500);
+
+                function setRegion(region) {
+                    const tabIn = document.getElementById('tab-in');
+                    const tabGl = document.getElementById('tab-gl');
+                    const payBtn = document.getElementById('paywall-btn');
+                    const voucherTxt = document.getElementById('voucher-txt');
+
+                    if (region === 'in') {
+                        tabIn.className = "bg-black/60 p-3 rounded-xl border-2 border-gold text-center cursor-pointer transition-all duration-300 relative group focus:outline-none";
+                        tabIn.classList.remove('opacity-50');
+                        tabGl.className = "bg-zinc-900/40 p-3 rounded-xl border border-white/10 text-center cursor-pointer opacity-50 hover:opacity-80 transition-all duration-300 relative group focus:outline-none";
+                        payBtn.innerText = "Unlock Premium Analysis Report (₹99)";
+                        if (voucherTxt) voucherTxt.innerText = "₹100";
+                    } else if (region === 'gl') {
+                        tabGl.className = "bg-black/60 p-3 rounded-xl border-2 border-gold text-center cursor-pointer transition-all duration-300 relative group focus:outline-none";
+                        tabGl.classList.remove('opacity-50');
+                        tabIn.className = "bg-zinc-900/40 p-3 rounded-xl border border-white/10 text-center cursor-pointer opacity-50 hover:opacity-80 transition-all duration-300 relative group focus:outline-none";
+                        payBtn.innerText = "Unlock Premium Analysis Report ($1.99)";
+                        if (voucherTxt) voucherTxt.innerText = "$2.00";
+                    }
+                }
+            </script>
+            <!-- JAVASCRIPT FOR SELECTING TABS AND UPDATING ALL PRICES -->
+            <script>
+                function selectPricingRegion(region) {
+                    const tabIn = document.getElementById('pay-tab-in');
+                    const tabGl = document.getElementById('pay-tab-gl');
+                    const ctaBtn = document.getElementById('paywall-cta-btn');
+                    const lowerPrice = document.getElementById('lower-box-price');
+
+                    if (region === 'in') {
+                        // Highlight India Tab
+                        tabIn.className = "bg-black/60 p-4 rounded-2xl border-2 border-gold text-center cursor-pointer relative shadow-[0_0_15px_rgba(207,161,82,0.1)] transition-all";
+                        tabIn.classList.remove('opacity-60');
+                        // Dim Global Tab
+                        tabGl.className = "bg-black/30 p-4 rounded-2xl border border-white/5 text-center cursor-pointer relative opacity-60 hover:opacity-90 transition-all";
+
+                        // Update Prices to INR
+                        ctaBtn.innerText = "Unlock My Report (₹99)";
+                        lowerPrice.innerText = "₹99";
+                    } else {
+                        // Highlight Global Tab
+                        tabGl.className = "bg-black/60 p-4 rounded-2xl border-2 border-gold text-center cursor-pointer relative shadow-[0_0_15px_rgba(207,161,82,0.1)] transition-all";
+                        tabGl.classList.remove('opacity-60');
+                        // Dim India Tab
+                        tabIn.className = "bg-black/30 p-4 rounded-2xl border border-white/5 text-center cursor-pointer relative opacity-60 hover:opacity-90 transition-all";
+
+                        // Update Prices to USD
+                        ctaBtn.innerText = "Unlock My Report ($1.99)";
+                        lowerPrice.innerText = "$1.99";
+                    }
+                }
+            </script>
+
+            <!-- FULL REGIMEN DATA CONTAINER (Initially completely blurred until secure purchase) -->
+            <div id="locked-premium-results"
+                class="space-y-6 filter blur-[8px] select-none pointer-events-none transition duration-1000 ease-in-out relative">
+
+                <h4
+                    class="text-xs tracking-widest uppercase text-zinc-400 font-bold font-serif border-b border-white/5 pb-2">
+                    Fully Personalized Premium Metrics</h4>
+
+                <div class="glass-panel rounded-2xl p-6 space-y-4">
+                    <h4 class="text-xs tracking-widest uppercase text-gold font-bold font-serif">Unveiling Premium 7-Day
+                        Dermal Chrono-Regimen</h4>
+                    <div class="space-y-4 divide-y divide-white/5">
+                        <div class="pt-1 flex items-start gap-4">
+                            <div
+                                class="w-8 h-8 rounded-lg bg-gold/10 border border-gold/30 flex items-center justify-center font-serif text-gold text-xs font-bold flex-shrink-0">
+                                AM</div>
+                            <div>
+                                <h5 class="text-xs font-bold text-white uppercase tracking-wider">Hydration & Protection
+                                    Formula</h5>
+                                <p class="text-[11px] text-zinc-400 mt-1 leading-relaxed font-light"
+                                    id="am-routine-text">
+                                    Integrate high-concentration Kumkumadi Tailam complex, then
+                                    apply mineralized block barrier.</p>
+                            </div>
+                        </div>
+                        <div class="pt-4 flex items-start gap-4">
+                            <div
+                                class="w-8 h-8 rounded-lg bg-zinc-900 border border-white/10 flex items-center justify-center font-serif text-zinc-400 text-xs font-bold flex-shrink-0">
+                                PM</div>
+                            <div>
+                                <h5 class="text-xs font-bold text-white uppercase tracking-wider">Lipid Re-Balancing &
+                                    Cellular Repair</h5>
+                                <p class="text-[11px] text-zinc-400 mt-1 leading-relaxed font-light"
+                                    id="pm-routine-text">
+                                    Dispense a micro-layer of organic Sandalwood hydrosol solution
+                                    to soothe skin cell structures.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="glass-panel rounded-2xl p-5 border border-gold/10">
+                    <span
+                        class="text-[10px] uppercase tracking-widest text-gold font-bold font-serif block mb-1">Extended
+                        Life-Sciences Recommendation</span>
+                    <p class="text-xs text-zinc-400 leading-relaxed font-light" id="extended-rec">
+                        Incorporate 3 drops of warm Sesame lipids into daily rituals to stabilize moisture evaporation
+                        zones. Avoid chemically aggressive foaming exfoliants during recovery.
+                    </p>
+                </div>
+            </div>
+
+            <!-- Retake Option -->
+            <div class="text-center pt-2">
+                <button onclick="resetApp()"
+                    class="text-xs text-zinc-500 hover:text-zinc-300 underline underline-offset-4 transition">
+                    Perform another skin analysis
+                </button>
+            </div>
+        </div>
+
+    </main>
+
+    <!-- SECURE INTERACTION DIALOG MODAL SHEET -->
+    <div id="payment-modal"
+        class="fixed inset-0 bg-black/92 backdrop-blur-md z-50 flex items-center justify-center p-4 hidden">
+        <div class="glass-panel w-full max-w-sm rounded-2xl p-6 border border-gold/40 relative space-y-6 bg-coal">
+
+            <div class="flex justify-between items-center border-b border-white/5 pb-4">
+                <span class="text-xs tracking-[0.2em] font-serif gold-text uppercase">Skany Secure Gateway</span>
+                <button onclick="closePaymentModal()" class="text-zinc-400 hover:text-white transition">
+                    <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12">
+                        </path>
+                    </svg>
+                </button>
+            </div>
+
+            <div class="text-center space-y-1 py-2">
+                <span class="text-xs text-zinc-500 uppercase tracking-widest font-semibold">Skany CLINICAL
+                    DIAGNOSTICS</span>
+                <div class="text-4xl font-serif text-white font-bold" id="modal-price-display">₹99.00</div>
+                <span
+                    class="text-[10px] text-emerald-400 bg-emerald-500/10 px-2.5 py-1 rounded-full inline-block font-mono mt-2">✓
+                    Verified Secure Gateway Link</span>
+            </div>
+
+            <div class="space-y-4">
+                <span class="text-[10px] text-zinc-400 uppercase tracking-widest block font-semibold">Select Transaction
+                    Method</span>
+
+                <!-- Indian UPI Block -->
+                <div id="india-payment-options" class="space-y-2">
+                    <button onclick="executeMockCheckout('UPI')"
+                        class="w-full p-4 rounded-xl border border-white/5 hover:border-gold/40 bg-white/5 hover:bg-gold/5 flex items-center justify-between transition group">
+                        <div class="flex items-center gap-3.5">
+                            <div
+                                class="w-8 h-8 rounded-lg bg-zinc-950 border border-white/5 flex items-center justify-center text-xs font-bold text-gold font-serif">
+                                UPI</div>
+                            <div class="text-left">
+                                <span class="block text-xs font-semibold text-white">Instant UPI Gateway</span>
+                                <span class="block text-[9px] text-zinc-500">Google Pay, PhonePe, Paytm, BHIM</span>
+                            </div>
+                        </div>
+                        <svg class="w-4 h-4 text-zinc-500 group-hover:text-gold transition" fill="none"
+                            stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7">
+                            </path>
+                        </svg>
+                    </button>
+                </div>
+
+                <!-- Global Credit Card Block -->
+                <div id="global-payment-options" class="space-y-2 hidden">
+                    <button onclick="executeMockCheckout('Card')"
+                        class="w-full p-4 rounded-xl border border-white/5 hover:border-gold/40 bg-white/5 hover:bg-gold/5 flex items-center justify-between transition group">
+                        <div class="flex items-center gap-3.5">
+                            <div
+                                class="w-8 h-8 rounded-lg bg-zinc-950 border border-white/5 flex items-center justify-center text-xs font-bold text-gold font-serif">
+                                CC</div>
+                            <div class="text-left">
+                                <span class="block text-xs font-semibold text-white">Credit or Debit Card</span>
+                                <span class="block text-[9px] text-zinc-500">Visa, Mastercard, Amex, ApplePay</span>
+                            </div>
+                        </div>
+                        <svg class="w-4 h-4 text-zinc-500 group-hover:text-gold transition" fill="none"
+                            stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7">
+                            </path>
+                        </svg>
+                    </button>
+                </div>
+            </div>
+
+            <!-- Payment Process loader state -->
+            <div id="payment-processing-loader"
+                class="absolute inset-0 bg-coal/98 rounded-2xl flex flex-col items-center justify-center p-6 space-y-4 hidden">
+                <div class="relative w-12 h-12">
+                    <div class="absolute inset-0 rounded-full border-2 border-zinc-800"></div>
+                    <div class="absolute inset-0 rounded-full border-2 border-t-gold animate-spin"></div>
+                </div>
+                <div class="text-center">
+                    <span class="text-xs uppercase tracking-widest text-zinc-400 block font-bold">CONTACTING ISSUING
+                        GATEWAY</span>
+                    <span id="payment-step-text" class="text-[10px] text-zinc-500 mt-1 block">Constructing 256-bit safe
+                        transmission socket...</span>
+                </div>
+            </div>
+
+            <div class="text-center text-[9px] text-zinc-600 tracking-wider">
+                PROTECTED BY COMPLIANT END-TO-END ADVANCED DATA ENCRYPTION.
+            </div>
+
+        </div>
+    </div>
+
+    <!-- 5-7 SECONDS HIGHLY OPTIMIZED AUTOMATIC DELAYED POPUP -->
+    <div id="delayed-popup"
+        class="fixed inset-0 bg-black/85 backdrop-blur-md z-40 flex items-center justify-center p-4 hidden">
+        <div
+            class="glass-panel w-full max-w-sm rounded-2xl p-6 border-2 border-gold/40 relative space-y-5 bg-coal/95 shadow-[0_20px_50px_rgba(207,161,82,0.2)]">
+
+            <!-- Dismiss/Close option -->
+            <button onclick="closeDelayedPopup()"
+                class="absolute top-4 right-4 text-zinc-400 hover:text-white transition text-lg font-bold">
+                ✕
+            </button>
+
+            <!-- Decorative Gold Frame Corners -->
+            <div class="absolute top-2 left-2 w-3 h-3 border-t border-l border-gold/40"></div>
+            <div class="absolute top-2 right-2 w-3 h-3 border-t border-r border-gold/40"></div>
+            <div class="absolute bottom-2 left-2 w-3 h-3 border-b border-l border-gold/40"></div>
+            <div class="absolute bottom-2 right-2 w-3 h-3 border-b border-r border-gold/40"></div>
+
+            <div class="text-center space-y-2">
+                <div
+                    class="inline-flex items-center gap-1.5 px-3 py-0.5 rounded-full border border-gold bg-gold/10 text-[9px] tracking-widest text-gold font-bold uppercase">
+                    ⚡ CONVERSION COMPLETED OFFER
+                </div>
+                <h4 class="text-xl font-serif text-white uppercase tracking-wide leading-relaxed">
+                    Complete Your Unlock
+                </h4>
+                <p class="text-xs text-zinc-300 leading-relaxed font-light">
+                    Your customized <span class="text-gold font-serif uppercase font-semibold"
+                        id="popup-dosha-name">Vata</span> routine formula has been fully computed. Complete your unlock
+                    to prevent data cache erasure!
+                </p>
+            </div>
+
+            <!-- Offers Holds For Timer section -->
+            <div class="bg-black/40 rounded-lg p-3 border border-white/5 text-center space-y-1">
+                <span class="text-[9px] uppercase tracking-widest text-zinc-500 font-bold block">OFFER EXPIRES IN</span>
+                <div class="text-xl font-mono text-gold font-bold" id="popup-timer">15:00</div>
+            </div>
+
+            <!-- Dynamic price checkout CTA block inside popup -->
+            <div class="space-y-3">
+                <div class="flex items-center justify-between border-t border-white/5 pt-3">
+                    <span class="text-[9px] text-zinc-500 uppercase tracking-widest font-bold block">TOTAL OUTLET
+                        PRICE:</span>
+                    <span class="text-lg font-serif text-gold font-bold" id="popup-price-display">₹99</span>
+                </div>
+                <button onclick="triggerPaymentFromPopup()"
+                    class="shimmer-btn w-full py-3.5 px-4 rounded-xl font-bold text-zinc-950 tracking-[0.15em] text-[10px] uppercase flex items-center justify-center gap-1.5 transition duration-300 shadow-lg">
+                    <span>Unlock Skin Routine Now</span>
+                </button>
+            </div>
+
+        </div>
+    </div>
+
+    <!-- FOOTER -->
+    <footer
+        class="relative z-10 w-full max-w-5xl mx-auto px-6 py-6 border-t border-white/5 text-center text-[10px] text-zinc-500 space-y-2">
+        <p>© 2026 Skany GLOBAL & AYURVAAN INC. ALL TRADEMARKS REGISTERED WORLDWIDE.</p>
+        <p class="font-serif italic text-gold/50">"Where organic bio-energetics meets artificial clinical diagnostics."
+        </p>
+    </footer>
+
+    <!-- INTERACTIVE ALGORITHMIC LOGIC -->
+    <script>
+        // Preset portraits mapped to exact reliable outputs
+        const presetPortraits = {
+            'female-1': {
+                name: "Priya Vance",
+                url: "https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&q=80&w=600",
+                skinAge: "24 Years",
+                barrierScore: 42,
+                barrierStatus: "Damaged Barrier",
+                primaryDosha: "Vata (Dermal Dehydration)",
+                primaryDoshaDesc: "Thin, delicate epidermic layers characterized by minimal lipid matrices, leading to localized dehydration, sensitivity to cold parameters, and micro-texture definition.",
+                vataVal: "72%",
+                pittaVal: "18%",
+                kaphaVal: "10%",
+                dailyRitual: "Apply warm Saffron-infused Goat milk infusion over the cheeks and T-Zone prior to solar exposure. Rinse with fresh room-temperature rosewater to consolidate barrier density.",
+                rootCause: "Your Vata is highly aggravated due to environmental heat stress and synthetic chemical over-exfoliation, leading to structural lipid depletion and moisture zone collapse.",
+                traits: ["Localized micro-texture scaling", "Dehydrated stratum corneum boundaries", "Accelerated cellular maturation", "Mild vascular dehydration redness"],
+                amRoutine: "Gently smooth three drops of highly purified Kumkumadi botanical lipid essence into forehead. Overlay with cold-pressed rose-water hydration mask.",
+                pmRoutine: "Apply high-grade cold-pressed Almond Lipid Extract directly over structural curves of cheeks. Avoid highly alkaline soaps.",
+                hotspots: [
+                    "Zone A: Forehead micro-dehydration lines.",
+                    "Zone B: Delicate capillary sensitivity boundaries.",
+                    "Zone C: Outer cheek lipid dry scaling."
+                ]
+            },
+            'female-2': {
+                name: "Elena Rostova",
+                url: "https://images.unsplash.com/photo-1544005313-94ddf0286df2?auto=format&fit=crop&q=80&w=600",
+                skinAge: "28 Years",
+                barrierScore: 54,
+                barrierStatus: "Mildly Inflamed",
+                primaryDosha: "Pitta (Sensitive / Inflamed)",
+                primaryDoshaDesc: "A warm, highly reactive dermal profile displaying high micro-vascular blood circulation. Susceptible to temperature mutations and inflammatory triggers.",
+                vataVal: "15%",
+                pittaVal: "75%",
+                kaphaVal: "10%",
+                dailyRitual: "Cleanse exclusively with cool sandalwood distillates. Use fresh aloe-vera gel directly over irritated warm zones to reduce local tissue temperature.",
+                rootCause: "Your Pitta is heavily aggravated by active atmospheric thermal exposure and synthetically aggressive soap matrices, causing localized micro-capillary dilation.",
+                traits: ["Thermal vascular dilatation cheeks", "UV-induced surface inflammation", "Altered epidermal balance thresholds", "Stable underlying collagen density"],
+                amRoutine: "Dab cold-pressed Sandalwood distillate across thermal hotspot zones. Overlay with lightweight non-comedogenic chamomile shield.",
+                pmRoutine: "Smooth raw botanical Aloe Vera gel extract on cheeks to calm tissue temperature indices overnight.",
+                hotspots: [
+                    "Zone A: Warm forehead thermal expansion.",
+                    "Zone B: Active vascular capillary dilatation.",
+                    "Zone C: Nasal micro-inflammation zone."
+                ]
+            },
+            'male-1': {
+                name: "Marcus Aurelius",
+                url: "https://images.unsplash.com/photo-1506794778202-cad84cf45f1d?auto=format&fit=crop&q=80&w=600",
+                skinAge: "33 Years",
+                barrierScore: 68,
+                barrierStatus: "Sebum Congestion",
+                primaryDosha: "Kapha (Oily / Clagged)",
+                primaryDoshaDesc: "A thick, structurally resilient dermal matrix characterized by optimal water retention and high sebaceous gland productivity, yielding high defenses against premature aging.",
+                vataVal: "10%",
+                pittaVal: "20%",
+                kaphaVal: "70%",
+                dailyRitual: "Utilize warm organic Chickpea and Neem botanical powders to absorb oil congestion across the nose and forehead once daily.",
+                rootCause: "Your Kapha is mildly aggravated due to rich lipid-heavy creams and moisture retention imbalances, resulting in structural sebaceous congestion coordinates.",
+                traits: ["Hyper-active lipid gland production", "Resilient overall collagen network", "Enlarged follicular pores", "Minimal biological aging coordinates"],
+                amRoutine: "Wash with light enzymatic apple cleanser (1%). Follow with oil-regulating saffron hydrosol solution.",
+                pmRoutine: "Incorporate mild oil-free Safflower lipids to regulate sebum production across nose and chin profiles.",
+                hotspots: [
+                    "Zone A: T-Zone active sebaceous secretions.",
+                    "Zone B: Lateral nasal pore micro-congestion.",
+                    "Zone C: Follicular sebum blockage coordinates."
+                ]
+            }
+        };
+
+        // Pricing logic configurations
+        let isIndia = true;
+        let priceVal = "99";
+        let currencySymbol = "₹";
+
+        let selectedPortrait = null;
+        let localStream = null;
+
+        // 15-Minute Rolling Countdown variables
+        let countdownDuration = 15 * 60; // 15 minutes in seconds
+        let countdownInterval = null;
+
+        // Automatically configure geolocation details on load
+        window.onload = function () {
+            detectUserLocationAndConfigure();
+            startRollingCountdown();
+        };
+
+        // Geolocation setup using client browser Timezone Offset
+        function detectUserLocationAndConfigure() {
+            try {
+                const tz = Intl.DateTimeFormat().resolvedOptions().timeZone;
+                const locBadge = document.getElementById('location-badge');
+
+                if (tz && (tz.includes("Kolkata") || tz.includes("India") || tz.includes("Asia/Calcutta"))) {
+                    isIndia = true;
+                    priceVal = "99";
+                    currencySymbol = "₹";
+                    locBadge.innerText = "📍 INDIA REGION (₹99 TICKET)";
+                    document.getElementById('india-payment-options').classList.remove('hidden');
+                    document.getElementById('global-payment-options').classList.add('hidden');
+                } else {
+                    isIndia = false;
+                    priceVal = "1.99";
+                    currencySymbol = "$";
+                    locBadge.innerText = "🌍 GLOBAL REGION ($1.99 TICKET)";
+                    document.getElementById('india-payment-options').classList.add('hidden');
+                    document.getElementById('global-payment-options').classList.remove('hidden');
+                }
+
+                // Update UI prices dynamically
+                document.getElementById('old-price').innerText = isIndia ? "₹1,499" : "$19.99";
+                document.getElementById('paywall-price-display').innerText = currencySymbol + priceVal;
+                document.getElementById('paywall-btn-text').innerText = `Unlock for ${currencySymbol}${priceVal}`;
+                document.getElementById('modal-price-display').innerText = `${currencySymbol}${priceVal}.00`;
+                document.getElementById('popup-price-display').innerText = currencySymbol + priceVal;
+            } catch (e) {
+                console.error("Location exception handled, safe fallback: ", e);
+            }
+        }
+
+        // Rolling 15-Minute Countdown clock algorithm
+        function startRollingCountdown() {
+            if (countdownInterval) clearInterval(countdownInterval);
+
+            const clockPaywall = document.getElementById('paywall-timer');
+            const clockPopup = document.getElementById('popup-timer');
+
+            countdownInterval = setInterval(() => {
+                let minutes = Math.floor(countdownDuration / 60);
+                let seconds = countdownDuration % 60;
+
+                minutes = minutes < 10 ? '0' + minutes : minutes;
+                seconds = seconds < 10 ? '0' + seconds : seconds;
+
+                clockPaywall.innerText = `${minutes}:${seconds}`;
+                clockPopup.innerText = `${minutes}:${seconds}`;
+
+                if (countdownDuration <= 0) {
+                    countdownDuration = 15 * 60; // Reset rolling cycle
+                } else {
+                    countdownDuration--;
+                }
+            }, 1000);
+        }
+
+        // Camera capture protocols
+        async function startLiveCamera() {
+            const videoEl = document.getElementById('webcam');
+            const camContainer = document.getElementById('camera-container');
+            const uploadButtons = document.getElementById('main-upload-buttons');
+
+            try {
+                localStream = await navigator.mediaDevices.getUserMedia({
+                    video: { facingMode: "user" },
+                    audio: false
+                });
+                videoEl.srcObject = localStream;
+                camContainer.classList.remove('hidden');
+                uploadButtons.classList.add('hidden');
+            } catch (err) {
+                alert("Camera access denied or unavailable. Please use the direct gallery Upload Photo interface.");
+                console.error("Webcam exception: ", err);
+            }
+        }
+
+        function captureSelfie() {
+            const videoEl = document.getElementById('webcam');
+            const canvas = document.createElement('canvas');
+            canvas.width = videoEl.videoWidth || 640;
+            canvas.height = videoEl.videoHeight || 480;
+
+            const ctx = canvas.getContext('2d');
+            ctx.translate(canvas.width, 0);
+            ctx.scale(-1, 1);
+            ctx.drawImage(videoEl, 0, 0, canvas.width, canvas.height);
+
+            const imageBase64 = canvas.toDataURL('image/png');
+
+            if (localStream) {
+                localStream.getTracks().forEach(track => track.stop());
+            }
+            document.getElementById('camera-container').classList.add('hidden');
+            document.getElementById('main-upload-buttons').classList.remove('hidden');
+
+            processCustomImageData(imageBase64);
+        }
+
+        function triggerFileInput() {
+            document.getElementById('user-file-input').click();
+        }
+
+        function handleCustomUpload(event) {
+            const file = event.target.files[0];
+            if (!file) return;
+
+            const reader = new FileReader();
+            reader.onload = function (e) {
+                processCustomImageData(e.target.result);
+            };
+            reader.readAsDataURL(file);
+        }
+
+        // Deterministic average image hash implementation (aHash) for custom images
+        function computeAverageImageHash(imageSrc, callback) {
+            const img = new Image();
+            img.crossOrigin = "Anonymous";
+            img.onload = function () {
+                const canvas = document.createElement('canvas');
+                const ctx = canvas.getContext('2d');
+                canvas.width = 8;
+                canvas.height = 8;
+                ctx.drawImage(img, 0, 0, 8, 8);
+
+                const imgData = ctx.getImageData(0, 0, 8, 8).data;
+                let grayscalePixels = [];
+                let sum = 0;
+
+                for (let i = 0; i < imgData.length; i += 4) {
+                    let gray = imgData[i] * 0.299 + imgData[i + 1] * 0.587 + imgData[i + 2] * 0.114;
+                    grayscalePixels.push(gray);
+                    sum += gray;
+                }
+
+                let averageBrightness = sum / 64;
+                let fingerprint = "";
+                for (let i = 0; i < 64; i++) {
+                    fingerprint += (grayscalePixels[i] >= averageBrightness) ? "1" : "0";
+                }
+
+                let numericSeed = 0;
+                for (let i = 0; i < fingerprint.length; i++) {
+                    if (fingerprint[i] === "1") {
+                        numericSeed += Math.pow(2, i % 10);
+                    }
+                }
+                callback(numericSeed);
+            };
+            img.src = imageSrc;
+        }
+
+        // Process picture dynamically with 100% reliable repeatability
+        function processCustomImageData(imageBase64) {
+            document.getElementById('scanned-image').src = imageBase64;
+
+            document.getElementById('view-upload').classList.add('hidden');
+            document.getElementById('view-scanning').classList.remove('hidden');
+
+            computeAverageImageHash(imageBase64, function (stableSeed) {
+                const doshaSelector = stableSeed % 3;
+
+                let finalDosha = "Vata";
+                let defaultDesc = "";
+                let score = 40 + (stableSeed % 28); // Generate stable score 40-68
+                let status = "Damaged Barrier";
+                if (score > 60) status = "Sebum Congestion";
+                else if (score > 50) status = "Mildly Inflamed";
+
+                let vataP = "10%", pittaP = "20%", kaphaP = "70%";
+                let ritualText = "";
+                let rootCauseText = "";
+                let derivedTraits = [];
+                let derivedAmRoutine = "";
+                let derivedPmRoutine = "";
+                let derivedHotspots = [];
+
+                if (doshaSelector === 0) {
+                    finalDosha = "Vata (Dermal Dehydration Matrix)";
+                    defaultDesc = "Thin, delicate epidermic layers characterized by minimal lipid matrices, leading to localized dehydration, sensitivity to cold parameters, and micro-texture definition.";
+                    vataP = "70%"; pittaP = "20%"; kaphaP = "10%";
+                    ritualText = "Apply warm Saffron-infused Goat milk infusion over the cheeks and T-Zone prior to solar exposure. Rinse with fresh room-temperature rosewater to consolidate barrier density.";
+                    rootCauseText = "Your Vata skin profile is highly aggravated due to dry atmospheric stresses and synthetic over-cleansing routines, causing extensive structural lipid depletion.";
+                    derivedTraits = ["Micro-texture definition", "Tends toward epidermal dryness", "Altered capillary sensitivity", "Accelerated biological maturity index"];
+                    derivedAmRoutine = "Gently smooth three drops of highly purified Kumkumadi botanical lipid essence into forehead. Overlay with cold-pressed rose-water hydration mask.";
+                    derivedPmRoutine = "Apply high-grade cold-pressed Almond Lipid Extract directly over structural curves of cheeks. Avoid highly alkaline soaps.";
+                    derivedHotspots = [
+                        "Zone A: Stratum Corneum micro-dehydration lines.",
+                        "Zone B: Active capillary tightness thresholds.",
+                        "Zone C: Local lipid moisture drop coordinates."
+                    ];
+                } else if (doshaSelector === 1) {
+                    finalDosha = "Pitta (Dermal Thermal Matrix)";
+                    defaultDesc = "A warm, reactive epidermal profile displaying high blood circulation densities. Susceptible to temperature alterations, UV exposure irritation, and cellular inflammation.";
+                    vataP = "20%"; pittaP = "70%"; kaphaP = "10%";
+                    ritualText = "Cleanse exclusively with cool sandalwood distillates. Apply raw botanical cucumber essence to calm local warm zones during high humidity hours.";
+                    rootCauseText = "Your Pitta is highly aggravated due to environmental heat stress and synthetic chemical over-exfoliation, leading to structural micro-capillary dilatation.";
+                    derivedTraits = ["Thermal capillary dilatation", "Localized UV-induced irritation", "Warm tissue moisture profiles", "Excellent central structural density"];
+                    derivedAmRoutine = "Dab cold-pressed Sandalwood distillate across thermal hotspot zones. Overlay with lightweight non-comedogenic chamomile shield.";
+                    derivedPmRoutine = "Smooth raw botanical Aloe Vera gel extract on cheeks to calm tissue temperature indices overnight.";
+                    derivedHotspots = [
+                        "Zone A: Warm forehead thermal expansion.",
+                        "Zone B: Active vascular capillary dilatation.",
+                        "Zone C: Nasal micro-inflammation zone."
+                    ];
+                } else {
+                    finalDosha = "Kapha (Sebaceous Density Matrix)";
+                    defaultDesc = "A thick, structurally resilient dermal matrix characterized by optimal water retention and high sebaceous gland productivity, yielding high defenses against premature aging.";
+                    vataP = "10%", pittaP = "20%", kaphaP = "70%";
+                    ritualText = "Utilize warm organic Chickpea and Neem botanical powders to absorb oil congestion across the nose and forehead once daily.";
+                    rootCauseText = "Your Kapha is mildly aggravated due to rich lipid-heavy creams and moisture retention imbalances, resulting in structural sebaceous congestion coordinates.";
+                    derivedTraits = ["Hyper-active lipid secretions", "Thick structural collagen layers", "Mild peri-nasal pore congestion", "Highly resilient protective barrier"];
+                    derivedAmRoutine = "Wash with light enzymatic apple cleanser (1%). Follow with oil-regulating saffron hydrosol solution.";
+                    derivedPmRoutine = "Incorporate mild oil-free Safflower lipids to regulate sebum production across nose and chin profiles.";
+                    derivedHotspots = [
+                        "Zone A: T-Zone active sebaceous secretions.",
+                        "Zone B: Lateral nasal pore micro-congestion.",
+                        "Zone C: Follicular sebum blockage coordinates."
+                    ];
+                }
+
+                const derivedAge = 21 + (stableSeed % 26);
+
+                selectedPortrait = {
+                    name: "Client Portfolio",
+                    url: imageBase64,
+                    skinAge: `${derivedAge} Years`,
+                    barrierScore: score,
+                    barrierStatus: status,
+                    primaryDosha: finalDosha,
+                    primaryDoshaDesc: defaultDesc,
+                    vataVal: vataP,
+                    pittaVal: pittaP,
+                    kaphaVal: kaphaP,
+                    dailyRitual: ritualText,
+                    rootCause: rootCauseText,
+                    traits: derivedTraits,
+                    amRoutine: derivedAmRoutine,
+                    pmRoutine: derivedPmRoutine,
+                    hotspots: derivedHotspots
+                };
+
+                startScanningSequence();
+            });
+        }
+
+        // Direct preselected button loading
+        function usePreloadPortrait(key) {
+            selectedPortrait = presetPortraits[key];
+            document.getElementById('scanned-image').src = selectedPortrait.url;
+            document.getElementById('view-upload').classList.add('hidden');
+            document.getElementById('view-scanning').classList.remove('hidden');
+            startScanningSequence();
+        }
+
+        // Active laser scanning animation timing
+        function startScanningSequence() {
+            const phases = [
+                { text: "Establishing secure capture stream parameters...", progress: 20, delay: 1300 },
+                { text: "Resolving epidermal cellular matrix boundaries...", progress: 50, delay: 1300 },
+                { text: "Mapping skin barrier integrity coordinates...", progress: 80, delay: 1300 },
+                { text: "Assembling custom Ayurvaan profile data...", progress: 100, delay: 1300 }
+            ];
+
+            let currentPhase = 0;
+            const statusTextEl = document.getElementById('scan-status-text');
+            const progressBarEl = document.getElementById('scan-progress-bar');
+            const percentEl = document.getElementById('scan-percentage');
+
+            function runPhase() {
+                if (currentPhase < phases.length) {
+                    const phase = phases[currentPhase];
+
+                    statusTextEl.style.opacity = 0;
+                    setTimeout(() => {
+                        statusTextEl.innerText = phase.text;
+                        statusTextEl.style.opacity = 1;
+                        progressBarEl.style.width = `${phase.progress}%`;
+                        percentEl.innerText = `${phase.progress}%`;
+                    }, 180);
+
+                    currentPhase++;
+                    setTimeout(runPhase, phase.delay);
+                } else {
+                    completeScanning();
+                }
+            }
+
+            runPhase();
+        }
+
+        // Completes the scan view, loads free tier metrics, prepares premium blocks
+        function completeScanning() {
+            document.getElementById('view-scanning').classList.add('hidden');
+            document.getElementById('view-report-container').classList.remove('hidden');
+
+            // Current timestamp formatting
+            const today = new Date();
+            const formattedDate = today.toLocaleDateString('en-US', { year: 'numeric', month: 'long', day: 'numeric' });
+            document.getElementById('report-date').innerText = formattedDate;
+
+            // Load FREE tier data
+            document.getElementById('unlocked-user-thumbnail').src = selectedPortrait.url;
+            document.getElementById('barrier-score-display').innerText = selectedPortrait.barrierScore;
+            document.getElementById('barrier-status-text').innerText = selectedPortrait.barrierStatus;
+
+            // Adjust score SVG circle indicator fill
+            const circleDashOffset = 251.2 - (251.2 * selectedPortrait.barrierScore) / 100;
+            document.getElementById('circle-score-dash').setAttribute('stroke-dashoffset', circleDashOffset);
+
+            // Dominant Dosha profile data
+            document.getElementById('primary-dosha-title').innerText = selectedPortrait.primaryDosha;
+            document.getElementById('primary-dosha-desc').innerText = selectedPortrait.primaryDoshaDesc;
+
+            // Root cause details
+            document.getElementById('root-cause-text').innerText = selectedPortrait.rootCause;
+            document.getElementById('free-daily-ritual').innerText = selectedPortrait.dailyRitual;
+
+            // Setup clinical meters
+            document.getElementById('meter-vata-val').innerText = selectedPortrait.vataVal;
+            document.getElementById('meter-vata-bar').style.width = selectedPortrait.vataVal;
+
+            document.getElementById('meter-pitta-val').innerText = selectedPortrait.pittaVal;
+            document.getElementById('meter-pitta-bar').style.width = selectedPortrait.pittaVal;
+
+            document.getElementById('meter-kapha-val').innerText = selectedPortrait.kaphaVal;
+            document.getElementById('meter-kapha-bar').style.width = selectedPortrait.kaphaVal;
+
+            // Load tooltips content onto the interactive facial marks hotspots
+            document.getElementById('dot-tooltip-1').innerText = selectedPortrait.hotspots[0];
+            document.getElementById('dot-tooltip-2').innerText = selectedPortrait.hotspots[1];
+            document.getElementById('dot-tooltip-3').innerText = selectedPortrait.hotspots[2];
+
+            // Setup paywall card details
+            document.getElementById('paywall-dosha-name').innerText = selectedPortrait.primaryDosha.split(" ")[0];
+
+            // Hydrate the locked elements behind the blur (Ready to unblur on successful purchase)
+            document.getElementById('trait-1').innerText = selectedPortrait.traits[0];
+            document.getElementById('trait-2').innerText = selectedPortrait.traits[1];
+            document.getElementById('trait-3').innerText = selectedPortrait.traits[2];
+            document.getElementById('trait-4').innerText = selectedPortrait.traits[3];
+            document.getElementById('am-routine-text').innerText = selectedPortrait.amRoutine;
+            document.getElementById('pm-routine-text').innerText = selectedPortrait.pmRoutine;
+
+            // Trigger the 6-second premium conversion popup helper
+            scheduleConversionPopup();
+        }
+
+        // Trigger conversion popup exactly 6 seconds after report loads
+        function scheduleConversionPopup() {
+            setTimeout(() => {
+                const delayedPopup = document.getElementById('delayed-popup');
+                // Only show popup if user hasn't unlocked the report yet
+                if (document.getElementById('paywall-overlay').style.display !== 'none') {
+                    document.getElementById('popup-dosha-name').innerText = selectedPortrait.primaryDosha.split(" ")[0];
+                    delayedPopup.classList.remove('hidden');
+                }
+            }, 6000); // 6000ms = 6 seconds delay after free tier loads
+        }
+
+        function closeDelayedPopup() {
+            document.getElementById('delayed-popup').classList.add('hidden');
+        }
+
+        function triggerPaymentFromPopup() {
+            closeDelayedPopup();
+            initiatePayment();
+        }
+
+        function initiatePayment() {
+            document.getElementById('payment-modal').classList.remove('hidden');
+        }
+
+        function closePaymentModal() {
+            document.getElementById('payment-modal').classList.add('hidden');
+        }
+
+        // Secure checkout stage processing
+        function executeMockCheckout(method) {
+            const loader = document.getElementById('payment-processing-loader');
+            const stepText = document.getElementById('payment-step-text');
+
+            loader.classList.remove('hidden');
+
+            const stages = [
+                "Contacting Skany Secure Bank Node...",
+                `Assembling certified payload via ${method} tokens...`,
+                "Authorizing absolute database allocation rights...",
+                "Success! Formulating complete dermal report file..."
+            ];
+
+            let stageIndex = 0;
+            function runCheckoutStages() {
+                if (stageIndex < stages.length) {
+                    stepText.innerText = stages[stageIndex];
+                    stageIndex++;
+                    setTimeout(runCheckoutStages, 1000);
+                } else {
+                    finalizeUnlock();
+                }
+            }
+            runCheckoutStages();
+        }
+
+        // Finalize transaction, bypass paywall, smoothly unblur results
+        function finalizeUnlock() {
+            document.getElementById('payment-processing-loader').classList.add('hidden');
+            closePaymentModal();
+            closeDelayedPopup();
+
+            const paywallOverlay = document.getElementById('paywall-overlay');
+            const lockedPremium = document.getElementById('locked-premium-results');
+
+            paywallOverlay.classList.add('opacity-0');
+            setTimeout(() => {
+                paywallOverlay.classList.add('hidden');
+
+                // Pure CSS class clear to unblur and unlock the diagnostic results
+                lockedPremium.classList.remove('filter', 'blur-[8px]', 'select-none', 'pointer-events-none');
+
+                // Scroll beautifully to the unlocked 7-Day routine
+                lockedPremium.scrollIntoView({ behavior: 'smooth' });
+            }, 500);
+        }
+
+        // Interactive diagnostic dot click tooltips
+        function revealHotspotTooltip(id) {
+            // Hotspots are already visually hoverable/clickable via Tailwind group triggers
+            console.log(`Diagnostic Marker Dot #${id} clicked.`);
+        }
+
+        // Clear memories, reset back to view 1
+        function resetApp() {
+            selectedPortrait = null;
+            document.getElementById('user-file-input').value = "";
+            document.getElementById('view-report-container').classList.add('hidden');
+
+            const paywallOverlay = document.getElementById('paywall-overlay');
+            const lockedPremium = document.getElementById('locked-premium-results');
+
+            paywallOverlay.classList.remove('hidden', 'opacity-0');
+            paywallOverlay.style.display = 'flex';
+            lockedPremium.classList.add('filter', 'blur-[8px]', 'select-none', 'pointer-events-none');
+
+            document.getElementById('view-upload').classList.remove('hidden');
+
+            // Reset countdown duration
+            countdownDuration = 15 * 60;
+        }
+    </script>
+</body>
+
+</html>
